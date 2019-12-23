@@ -1,12 +1,3 @@
-<div fxLayout="column"
-     fxLayoutGap="15px"
-     fxFlexAlign="space-around start">
-  <button mat-button
-          (click)="setOption(1)">Basic</button>
-  <button mat-button
-          (click)="setOption(2)">Advanced</button>
-</div>
-<ng-container *ngIf="option === 1">
   <div fxLayout="row"
        fxLayoutGap="15px"
        fxFlex="30%"
@@ -16,8 +7,7 @@
       <h4> {{arrayOfColumns[i]}} - {{arrayOfColumns[i+1]}}BBY</h4>
       <div *ngFor="let character of charactersWithBirthYear">
         <div *ngIf="character.birth_year >= arrayOfColumns[i] && character.birth_year < arrayOfColumns[i+1]">
-          <app-swapi-item [character]="character"
-                          [option]="option">
+          <app-swapi-item [character]="character">
           </app-swapi-item>
         </div>
       </div>
@@ -26,8 +16,7 @@
       <h4> {{arrayOfColumns[arrayOfColumns.length - 1]}}BBY ... </h4>
       <div *ngFor="let character of charactersWithBirthYear">
         <div *ngIf="character.birth_year >= arrayOfColumns[arrayOfColumns.length - 1]">
-          <app-swapi-item [character]="character"
-                          [option]="option">
+          <app-swapi-item [character]="character">
           </app-swapi-item>
         </div>
       </div>
@@ -37,23 +26,8 @@
     <h4> Unknown </h4>
     <div *ngFor="let character of charactersWithUnknownBirthYear">
       <div>
-        <app-swapi-item [character]="character"
-                        [option]="option">
+        <app-swapi-item [character]="character">
         </app-swapi-item>
       </div>
     </div>
   </div>
-</ng-container>
-<ng-container *ngIf="option === 2">
-  <div fxLayout="column">
-    <div fxLayout="row"
-         *ngFor="let character of charactersWithBirthYear">
-      <div fxFlex="10%"> {{character.name}} </div>
-      <div fxFlex="90%">
-        <app-swapi-item [character]="character"
-                        [option]="option">
-        </app-swapi-item>
-      </div>
-    </div>
-  </div>
-</ng-container>

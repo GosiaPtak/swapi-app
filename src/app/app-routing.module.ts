@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { SwapiListOpt1Component } from './pages/swapi-list-option1/swapi-list.component';
+import { SwapiListComponent } from './pages/swapi-list/swapi-list.component';
 
-const routes: Routes = [{ path: '', component: SwapiListOpt1Component }];
+const routes: Routes = [{ path: '', component: SwapiListComponent }];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

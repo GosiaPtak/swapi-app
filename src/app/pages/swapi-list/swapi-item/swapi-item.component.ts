@@ -7,7 +7,6 @@ import { Character } from './../../../shared/models/character.model';
 })
 export class SwapiItemComponent implements OnInit {
   @Input() character: Character;
-  @Input() option: number;
   constructor() {}
 
   ngOnInit() {}

@@ -1,4 +1,4 @@
-import { Component, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { SwapiListService } from './swapi-list.service';
 import { Character } from '../../shared/models/character.model';
 
@@ -8,7 +8,7 @@ import { Character } from '../../shared/models/character.model';
   styleUrls: ['./swapi-list.component.scss'],
   providers: [SwapiListService]
 })
-export class SwapiListOpt1Component implements OnInit {
+export class SwapiListComponent implements OnInit {
   public characters: Character[];
   public listOfCharacters: { map?: any };
   public charactersWithBirthYear: Character[];
@@ -16,7 +16,6 @@ export class SwapiListOpt1Component implements OnInit {
   public columns = { start: 0, end: 120, step: 20 };
   public arrayOfColumns = [];
   public column: any;
-  public option = 1;
   constructor(private swapiListService: SwapiListService) {}
 
   ngOnInit() {
@@ -51,8 +50,5 @@ export class SwapiListOpt1Component implements OnInit {
   getColumns() {
     this.arrayOfColumns = Array.from(Array.from(Array(Math.ceil((this.columns.end - this.columns.start) / this.columns.step)).keys()), x => this.columns.start + x * this.columns.step);
     return this.arrayOfColumns;
-  }
-  setOption(option) {
-    this.option = option;
   }
 }
