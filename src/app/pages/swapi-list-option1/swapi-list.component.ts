@@ -1,6 +1,6 @@
 import { Component, OnInit, Output } from '@angular/core';
 import { SwapiListService } from './swapi-list.service';
-import { Character } from '../models/character.model';
+import { Character } from '../../shared/models/character.model';
 
 @Component({
   selector: 'app-swapi-list',
@@ -8,26 +8,30 @@ import { Character } from '../models/character.model';
   styleUrls: ['./swapi-list.component.scss'],
   providers: [SwapiListService]
 })
-export class SwapiListComponent implements OnInit {
+export class SwapiListOpt1Component implements OnInit {
   public characters: Character[];
   public listOfCharacters: { map?: any };
-  @Output() public charactersWithBirthYear: Character[];
-  @Output() public charactersWithUnknownBirthYear: Character[];
+  public charactersWithBirthYear: Character[];
+  public charactersWithUnknownBirthYear: Character[];
   public columns = { start: 0, end: 120, step: 20 };
   public arrayOfColumns = [];
   public column: any;
+  public option = 1;
   constructor(private swapiListService: SwapiListService) {}
 
   ngOnInit() {
     this.getListOfCharacters();
   }
   getListOfCharacters(): void {
-    this.swapiListService.getPeople().subscribe(val => {
-      const charactersOfSwapi: { map?: any } = val;
-      this.listOfCharacters = charactersOfSwapi.map((loc: { results: [] }) => loc.results).flat(2);
-      this.getColumns();
-      return this.mapCharacters(this.listOfCharacters);
-    });
+    this.swapiListService.getPeople().subscribe(
+      val => {
+        const charactersOfSwapi: { map?: any } = val;
+        this.listOfCharacters = charactersOfSwapi.map((loc: { results: [] }) => loc.results).flat(2);
+        this.getColumns();
+        return this.mapCharacters(this.listOfCharacters);
+      },
+      error => console.log('error', error)
+    );
   }
 
   mapCharacters(listOfCharacters) {
@@ -36,7 +40,7 @@ export class SwapiListComponent implements OnInit {
       height: character.height,
       mass: character.mass,
       birth_year: character.birth_year !== 'unknown' ? Number(character.birth_year.slice(0, -3)) : character.birth_year,
-      BMI: character.mass / Math.pow(character.height / 100, 2)
+      BMI: Number(character.mass) ? character.mass / Math.pow(character.height / 100, 2) : 0
     }));
     this.filterByYear(SwapiCharacters);
   }
@@ -46,7 +50,9 @@ export class SwapiListComponent implements OnInit {
   }
   getColumns() {
     this.arrayOfColumns = Array.from(Array.from(Array(Math.ceil((this.columns.end - this.columns.start) / this.columns.step)).keys()), x => this.columns.start + x * this.columns.step);
-    console.log(this.arrayOfColumns);
     return this.arrayOfColumns;
+  }
+  setOption(option) {
+    this.option = option;
   }
 }

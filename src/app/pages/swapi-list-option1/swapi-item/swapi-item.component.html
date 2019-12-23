@@ -1,0 +1,20 @@
+<div *ngIf="option === 1"
+     [ngClass]="{'black16': character.BMI > 0 && character.BMI <= 16,
+  'green24': character.BMI >= 16 && character.BMI < 24,
+  'orange39': character.BMI >= 24 && character.BMI < 40,
+  'red40':  character.BMI >= 40,
+  'nan': character.BMI == 0}">
+  {{ character.name }}
+</div>
+
+<div *ngIf="option === 2"
+     [ngClass]="{'black16': character.BMI > 0 && character.BMI <= 16,
+                 'green24': character.BMI >= 16 && character.BMI < 24,
+                 'orange39': character.BMI >= 24 && character.BMI < 40,
+                 'red40':  character.BMI >= 40,
+                'nan': character.BMI == 0}"
+     [style.left.px]="character.birth_year"
+     [style.width.px]="character.birth_year"
+     [style.position]="'relative'">
+  {{ character.birth_year }}
+</div>

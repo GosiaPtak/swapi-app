@@ -1,8 +1,0 @@
-<div [ngClass]="{'black16': character.BMI < 16,
-                 'green24': character.BMI > 16 && character.BMI < 24,
-                 'orange39': character.BMI > 24 && character.BMI < 39,
-                 'red40':  character.BMI > 40}"
-     [style.width.px]="100"
-     [style.height.px]="100">
-  {{ character.name }}{{ character.birth_year }}
-</div>
