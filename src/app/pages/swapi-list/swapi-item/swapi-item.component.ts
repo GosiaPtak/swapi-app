@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-swapi-item',
@@ -6,10 +6,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./swapi-item.component.scss']
 })
 export class SwapiItemComponent implements OnInit {
-
-  constructor() { }
+  @Input() character: [];
+  constructor() {}
 
   ngOnInit() {
+    console.log('charactersWithBirthYear', this.character);
   }
-
 }

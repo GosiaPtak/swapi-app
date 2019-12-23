@@ -1,3 +1,11 @@
-<p>swapi-list works!</p>
-
-<span *ngFor="let one of people">{{ one.count }}</span>
+<div *ngFor="let column of arrayOfColumns; index as i">
+  <div *ngIf="column >= arrayOfColumns[i] && column < arrayOfColumns[i+1]">
+    {{arrayOfColumns[i]}} {{arrayOfColumns[i+1]}}
+    <div *ngFor="let character of charactersWithBirthYear">
+      <div *ngIf="character.birth_year>= arrayOfColumns[i] && character.birth_year< arrayOfColumns[i+1]">
+        <app-swapi-item [character]="character">
+        </app-swapi-item>
+      </div>
+    </div>
+  </div>
+</div>
